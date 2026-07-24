@@ -11,14 +11,15 @@ module.exports = class Email {
   }
 
   newTransport() {
-    // if (process.env.NODE_ENV === 'production')
-    //   return nodeMailer.createTransport({
-    //     service: 'SendGrid',
-    //     auth: {
-    //       user: process.env.SENDGRID_USERNAME,
-    //       pass: process.env.SENDGRID_PASSWORD,
-    //     },
-    //   });
+    if (process.env.NODE_ENV === 'production')
+      return nodeMailer.createTransport({
+        host: process.env.BREVO_EMAIL_HOST,
+        port: process.env.BREVO_EMAIL_PORT,
+        auth: {
+          user: process.env.BREVO_EMAIL_USERNAME,
+          pass: process.env.BREVO_EMAIL_PASSWORD,
+        },
+      });
 
     return nodeMailer.createTransport({
       host: process.env.EMAIL_HOST,
@@ -47,6 +48,8 @@ module.exports = class Email {
       html,
       text: htmlToText.convert(html),
     };
+
+    console.log(html);
 
     await this.newTransport().sendMail(mailOptions);
   }
