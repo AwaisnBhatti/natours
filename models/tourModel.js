@@ -180,11 +180,11 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
-tourSchema.post(/^find/, function (doc, next) {
-  console.log(doc, `Query took ${Date.now() - this.start} milliseconds`);
-  console.log(doc);
-  next();
-});
+// tourSchema.post(/^find/, function (doc, next) {
+//   console.log(doc, `Query took ${Date.now() - this.start} milliseconds`);
+//   // console.log(doc);
+//   next();
+// });
 
 // tourSchema.pre('aggregate', function (next) {
 //   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
